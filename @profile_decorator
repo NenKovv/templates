@@ -1,21 +1,16 @@
-import time
+from time import sleep, time
 
-def exec_time(func):
 
-    def wrapper(*args):
-        start = time.time()
-        func(*args)
-        end = time.time()
-
-        return end - start
-
+def measure_time(func):
+    def wrapper(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = time()
+        print(f"Execution time of {func.__name__}: {end - start} seconds")
+        return result
     return wrapper
 
-@exec_time
-def loop(start, end):
-    total = 0
-
-    for x in range(start, end):
-        total += x
-
-    return total
+@measure_time
+def slow_function(n):
+    sleep(n)
+    
