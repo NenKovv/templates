@@ -1,0 +1,10 @@
+def repeat(n):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@repeat(4)
+def say_hello():
+    print("Hello")
